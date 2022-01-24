@@ -1,0 +1,229 @@
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0">S.G.Koppada</a>
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0">24K Gold Price: 48000</a>
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0">22K Gold Price: 48000</a>
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0">Silver Price: 48000</a>
+</nav>
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" (click)="dashboard()">
+              <span data-feather="home"></span>
+              Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="orders()">
+              <span data-feather="file"></span>
+              Orders
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="catalog()">
+              <span data-feather="shopping-cart"></span>
+              Catalog
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="customer()">
+              <span data-feather="users"></span>
+              Customers
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" (click)="reports()">
+              <span data-feather="bar-chart-2"></span>
+              Reports
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" (click)="invoice()">
+              <span data-feather="layers"></span>
+              Invoice
+            </a>
+          </li>
+        </ul>
+
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Daily Analysis</span>
+          <a class="d-flex align-items-center text-muted">
+            <span data-feather="plus-circle"></span>
+          </a>
+        </h6>
+        <ul class="nav flex-column mb-2">
+          <li class="nav-item">
+            <a class="nav-link">
+              <span data-feather="file-text"></span>
+              Day to Day
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              <span data-feather="file-text"></span>
+              Week to Week
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              <span data-feather="file-text"></span>
+              Month to Month
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">
+              <span data-feather="file-text"></span>
+              Year-end
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+        <h1 class="h2">Dashboard</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group mr-2">
+            <button class="btn btn-sm btn-outline-secondary">Save</button>
+            <button class="btn btn-sm btn-outline-secondary">Print</button>
+          </div>      
+        </div>
+      </div>
+    </main>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+        </div>
+        <div class="col-9">
+          <div class="row mb-4">
+            <div class="col-sm-6">
+                <h3 class="text-dark mb-1">S G Koppada Jewellers</h3>
+                <div>Indi, Bijapur, Pincode:</div>
+                <div>Phone: +91 9897 989 989</div>
+            </div>
+            <div class="col-sm-6">
+              <table>
+                <tr>
+                  <th>
+                    Name:
+                  </th> 
+                  <th>
+                    <input [(ngModel)]="custname" type="text" name="customer name" id="custname" value="" required><br>
+                  </th>
+                </tr>
+                <tr>
+                  <th>
+                    Address:
+                  </th> 
+                  <th>
+                    <input [(ngModel)]="custAddress" type="text" name="customer Address" id="custAddress" value="" required><br>
+                  </th>
+                </tr>
+                <tr>
+                  <th>
+                    Phone:
+                  </th> 
+                  <th>
+                    <input [(ngModel)]="custPhone" type="text" name="customer phone" id="custPhone" value="" required minlength="10"><br>
+                  </th>
+                </tr>
+              </table>
+            </div>
+        </div>
+
+        <div class="col-9">
+          <div class="row mb-4">
+            <div class="col-sm-8">
+              <!--<table class="table table-hover">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Quanity</th>
+                    <th scope="col">Amount</th>
+                  </tr>
+                </thead>  
+                <tr *ngFor="let order of orderList; let id = index"></tr>
+                <td>
+                  <input [(ngModel)]="order.id" class="form-control" type="text" name="Quantity" id="orderQuantity" (blur)="updateList(id, 'name', $event)" value="{{order.id}}" required><br>
+                </td>
+                <td>
+                  <input [(ngModel)]="order.description" class="form-control" type="text" name="Quantity" id="orderQuantity" value="{{order.description}}" required><br>
+                </td>
+                <td>
+                  <input [(ngModel)]="order.quantity" class="form-control" type="text" name="Quantity" id="orderQuantity" value="{{order.quantity}}" required><br>
+                </td>
+                <td>
+                  <input [(ngModel)]="order.amount" class="form-control" type="text" name="Amount" id="orderAmount" value="{{order.amount}}" required><br>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-primary btn-sm" (click)="add()"> Add </button>
+                </td>
+              </table> -->
+              <!--<table class="table table-striped table-bordered">-->
+              <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Quanity</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let order of orderList; let i = index">
+                        <td scope="row" >
+                            <input [(ngModel)]="order.id" class="form-control" type="text" name="{{order.id}}" />
+                        </td>
+                        <td scope="row">
+                            <input [(ngModel)]="order.description" class="form-control" type="text" name="{{order.description}}" />
+                        </td>
+                        <td scope="row">
+                            <input [(ngModel)]="order.quantity" class="form-control" type="text" name="{{order.quantity}}" />
+                        </td>
+                        <td scope="row">
+                          <input [(ngModel)]="order.amount" class="form-control" type="text" name="{{order.amount}}" />
+                        </td>
+                        <td scope="row">
+                            <button class="btn btn-default"  type="button" (click)="deleteFieldValue(i)">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td scope="row">
+                            <input  type="text" id="newAttributeID" [(ngModel)]="newAttribute.id" name="newAttributeCode" />
+                        </td>
+                        <td>
+                            <input  type="text" id="newAttributeName" [(ngModel)]="newAttribute.description" name="newAttributeName" />
+                        </td>
+                        <td>
+                            <input  type="text" id="newAttributePrice" [(ngModel)]="newAttribute.quantity" name="newAttributePrice" />
+                        </td>
+                        <td>
+                          <input  type="text" id="newAttributePrice" [(ngModel)]="newAttribute.amount" name="newAttributePrice" />
+                      </td>
+                        <td>
+                            <button  type="button" (click)="addFieldValue(newAttribute.id,newAttribute.description,newAttribute.quantity,newAttribute.amount)">Add</button>
+                        </td>
+                    </tr>
+                </tbody>
+                <thead class="thead-dark">
+                  <tr>
+                      <th scope="col"></th>
+                      <th scope="col"></th>
+                      <th scope="col">Total</th>
+                      <th scope="col">{{totalAmount}}</th>
+                      <th scope="col"></th>
+                  </tr>
+              </thead>
+            </table>
+            </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>  

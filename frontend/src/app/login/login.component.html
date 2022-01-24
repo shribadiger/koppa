@@ -1,0 +1,21 @@
+<body>
+<div class="center">
+  <h1>Login</h1>
+  <form>
+    <div class="txt_field">
+      <input [(ngModel)]="username" type="text" name="username" id="username" required>
+      <label>Username</label>
+      <span></span>
+    </div>
+    <div class="txt_field">
+      <input [(ngModel)]="password" type="password" name="password" id="password" required>
+      <label>Password</label>
+      <span></span>
+    </div>
+    <div class="pass">Forgot Password?</div>
+    <button (click)="login()">Login</button>
+    <div class="signup_link">
+    </div>
+  </form>
+</div>
+</body>
