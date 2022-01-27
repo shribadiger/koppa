@@ -97,3 +97,10 @@ body {
 .title .button {
   float: right;
 }  
+
+textarea {
+  border: none;
+  background-color: transparent;
+  resize: none;
+  outline: none;
+}

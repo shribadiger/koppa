@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Data } from '@angular/router';
 import {NgxPrintModule} from 'ngx-print';
 
-
 @Component({
   selector: 'app-invoice',
   templateUrl: './invoice.component.html',

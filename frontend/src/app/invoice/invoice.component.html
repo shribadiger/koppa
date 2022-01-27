@@ -112,7 +112,7 @@
                     Name:
                   </th> 
                   <th>
-                    <input [(ngModel)]="custname" type="text" name="customer name" id="custname" value="" required><br>
+                    <input style="border: 0ch;"  [(ngModel)]="custname" type="text" name="customer name" id="custname" value="" required><br>
                   </th>
                 </tr>
                 <tr>
@@ -120,7 +120,7 @@
                     Address:
                   </th> 
                   <th>
-                    <input [(ngModel)]="custAddress" type="text" name="customer Address" id="custAddress" value="" required><br>
+                    <input style="border: 0ch;" [(ngModel)]="custAddress" type="text" name="customer Address" id="custAddress" value="" required><br>
                   </th>
                 </tr>
                 <tr>
@@ -128,7 +128,7 @@
                     Phone:
                   </th> 
                   <th>
-                    <input [(ngModel)]="custPhone" type="text" name="customer phone" id="custPhone" value="" required minlength="10"><br>
+                    <input style="border: 0ch;" [(ngModel)]="custPhone" type="text" name="customer phone" id="custPhone" value="" required minlength="10"><br>
                   </th>
                 </tr>
               </table>
@@ -178,16 +178,16 @@
                 <tbody>
                     <tr *ngFor="let order of orderList; let i = index">
                         <td scope="row" >
-                            <input [(ngModel)]="order.id" class="form-control" type="text" name="{{order.id}}" />
+                            <input style="border: 0ch;" [(ngModel)]="order.id" class="form-control" type="text" name="{{order.id}}" />
                         </td>
                         <td scope="row">
-                            <input [(ngModel)]="order.description" class="form-control" type="text" name="{{order.description}}" />
+                            <input style="border: 0ch;" [(ngModel)]="order.description" class="form-control" type="text" name="{{order.description}}" />
                         </td>
                         <td scope="row">
-                            <input [(ngModel)]="order.quantity" class="form-control" type="text" name="{{order.quantity}}" />
+                            <input style="border: 0ch;" [(ngModel)]="order.quantity" class="form-control" type="text" name="{{order.quantity}}" />
                         </td>
                         <td scope="row">
-                          <input [(ngModel)]="order.amount" class="form-control" type="text" name="{{order.amount}}" disabled/>
+                          <input style="border: 0ch;" [(ngModel)]="order.amount" class="form-control" type="text" name="{{order.amount}}" disabled/>
                         </td>
                         <td scope="row">
                             <button class="btn btn-default"  type="button" (click)="deleteFieldValue(i)">Delete</button>
