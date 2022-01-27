@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Data } from '@angular/router';
+import {NgxPrintModule} from 'ngx-print';
+
 
 @Component({
   selector: 'app-invoice',
@@ -7,33 +9,45 @@ import { Router, ActivatedRoute, Data } from '@angular/router';
   styleUrls: ['./invoice.component.css']
 })
 export class InvoiceComponent implements OnInit {
-  tableHeaders = ['Header 1', 'Header 2', 'Header 3'];
-
-  tableRowsWithId = [
-    [1, 'Example', 'Example', true]
-  ];
-  dataType = ['string', 'string', 'boolean'];
-  constructor(private router: Router) { }
   id:number;
   description:string;
   quantity:number;
   amount:number;
   totalAmount:number;
+  totalBalance:number;
+  finalAmount:string;
+  totalAdvance:number;
+  todayDate : Date = new Date();
+  constructor(private router: Router) { 
+    this.totalAmount=0;
+    this.totalBalance=0;
+    this.totalAdvance=0;
+  }
+  
   private orderList: Array<any> = [];
-    private newAttribute: any = {};
+  private newAttribute: any = {};
 
-    addFieldValue(Id:number,Descp:string,Quant:number,Amt:number)
+  
+    addFieldValue(Id:string,Descp:string,Quant:string,Amt:string)
     {
-        this.newAttribute={id:Id,description:Descp,quantity:Quant,amount:Amt}
+        this.newAttribute={"id":Id,"description":Descp,"quantity":Quant,"amount":Amt}
         console.log(this.newAttribute);
         this.orderList.push(this.newAttribute)
-        this.totalAmount=this.totalAmount+this.amount;
         this.newAttribute = {};
-        this.totalAmount = 1000;
+        this.totalAmount=this.totalAmount+parseInt(Amt);
+        this.totalBalance=this.totalAmount;
     }
+   
 
     deleteFieldValue(index) {
+        console.log("Deleting the value");
+        this.totalAmount=this.totalAmount-parseInt(this.orderList[index].amount);
         this.orderList.splice(index, 1);
+    }
+    addAdvance(advance='0'){
+      console.log("Advance Amount");
+      this.totalAdvance=parseInt(advance);
+      this.totalBalance=this.totalAmount-this.totalAdvance;
     }
   ngOnInit() {
   

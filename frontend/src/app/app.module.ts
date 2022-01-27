@@ -16,6 +16,8 @@ import { CatalogComponent } from './catalog/catalog.component';
 import { CustomerComponent } from './customer/customer.component';
 import { ReportsComponent } from './reports/reports.component';
 import { InvoiceComponent } from './invoice/invoice.component';
+import {NgxPrintModule} from 'ngx-print';
+
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { InvoiceComponent } from './invoice/invoice.component';
     MatCardModule,
     MatInputModule,
     FormsModule,
-    MatSidenavModule
+    MatSidenavModule,
+    NgxPrintModule
   ],
   providers: [],
   bootstrap: [AppComponent]

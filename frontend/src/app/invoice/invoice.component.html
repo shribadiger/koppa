@@ -88,7 +88,7 @@
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group mr-2">
             <button class="btn btn-sm btn-outline-secondary">Save</button>
-            <button class="btn btn-sm btn-outline-secondary">Print</button>
+            <button class="btn btn-sm btn-outline-secondary" printSectionId="print-section" ngxPrint>Print</button>
           </div>      
         </div>
       </div>
@@ -103,6 +103,7 @@
                 <h3 class="text-dark mb-1">S G Koppada Jewellers</h3>
                 <div>Indi, Bijapur, Pincode:</div>
                 <div>Phone: +91 9897 989 989</div>
+                <div>Date: {{todayDate | date:'short':'IST'}}</div>
             </div>
             <div class="col-sm-6">
               <table>
@@ -186,7 +187,7 @@
                             <input [(ngModel)]="order.quantity" class="form-control" type="text" name="{{order.quantity}}" />
                         </td>
                         <td scope="row">
-                          <input [(ngModel)]="order.amount" class="form-control" type="text" name="{{order.amount}}" />
+                          <input [(ngModel)]="order.amount" class="form-control" type="text" name="{{order.amount}}" disabled/>
                         </td>
                         <td scope="row">
                             <button class="btn btn-default"  type="button" (click)="deleteFieldValue(i)">Delete</button>
@@ -194,16 +195,16 @@
                     </tr>
                     <tr>
                         <td scope="row">
-                            <input  type="text" id="newAttributeID" [(ngModel)]="newAttribute.id" name="newAttributeCode" />
+                            <input   type="text" id="newAttributeID" [(ngModel)]="newAttribute.id" name="newAttributeCode" />
                         </td>
                         <td>
                             <input  type="text" id="newAttributeName" [(ngModel)]="newAttribute.description" name="newAttributeName" />
                         </td>
                         <td>
-                            <input  type="text" id="newAttributePrice" [(ngModel)]="newAttribute.quantity" name="newAttributePrice" />
+                            <input  type="text"  id="newAttributeQuantity" [(ngModel)]="newAttribute.quantity" name="newAttributePrice"/>
                         </td>
                         <td>
-                          <input  type="text" id="newAttributePrice" [(ngModel)]="newAttribute.amount" name="newAttributePrice" />
+                          <input   type="text" id="newAttributePrice" [(ngModel)]="newAttribute.amount" name="newAttributePrice" />
                       </td>
                         <td>
                             <button  type="button" (click)="addFieldValue(newAttribute.id,newAttribute.description,newAttribute.quantity,newAttribute.amount)">Add</button>
@@ -214,10 +215,24 @@
                   <tr>
                       <th scope="col"></th>
                       <th scope="col"></th>
-                      <th scope="col">Total</th>
+                      <th scope="col">Payable</th>
                       <th scope="col">{{totalAmount}}</th>
                       <th scope="col"></th>
                   </tr>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col">Advance</th>
+                    <th scope="col"><input   type="text" id="advance" [(ngModel)]="advance" name="advance" value=0/></th>
+                    <th scope="col"><button  type="button" (click)="addAdvance(advance)">Add</button></th>
+                </tr>
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col">Balance</th>
+                  <th scope="col">{{totalBalance}}</th>
+                  <th scope="col"></th>
+              </tr>
               </thead>
             </table>
             </div>
