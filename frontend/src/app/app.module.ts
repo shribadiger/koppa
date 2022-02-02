@@ -17,6 +17,7 @@ import { CustomerComponent } from './customer/customer.component';
 import { ReportsComponent } from './reports/reports.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import {NgxPrintModule} from 'ngx-print';
+import { EstimateComponent } from './estimate/estimate.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {NgxPrintModule} from 'ngx-print';
     CatalogComponent,
     CustomerComponent,
     ReportsComponent,
-    InvoiceComponent
+    InvoiceComponent,
+    EstimateComponent
   ],
   imports: [
     BrowserModule,

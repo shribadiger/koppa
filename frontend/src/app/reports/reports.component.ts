@@ -30,5 +30,8 @@ export class ReportsComponent implements OnInit {
   invoice(){
     this.router.navigate(['/invoice'])
   }
+  estimate(){
+    this.router.navigate(['/estimate'])
+  }
 
 }

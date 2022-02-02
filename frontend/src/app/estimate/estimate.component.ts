@@ -3,11 +3,12 @@ import { Router, ActivatedRoute, Data } from '@angular/router';
 import {NgxPrintModule} from 'ngx-print';
 
 @Component({
-  selector: 'app-invoice',
-  templateUrl: './invoice.component.html',
-  styleUrls: ['./invoice.component.css']
+  selector: 'app-estimate',
+  templateUrl: './estimate.component.html',
+  styleUrls: ['./estimate.component.css']
 })
-export class InvoiceComponent implements OnInit {
+export class EstimateComponent implements OnInit {
+
   id:number;
   description:string;
   quantity:number;
@@ -75,4 +76,5 @@ export class InvoiceComponent implements OnInit {
   estimate(){
     this.router.navigate(['/estimate'])
   }
+
 }

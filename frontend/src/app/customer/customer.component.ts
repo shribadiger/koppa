@@ -30,4 +30,7 @@ export class CustomerComponent implements OnInit {
   invoice(){
     this.router.navigate(['/invoice'])
   }
+  estimate(){
+    this.router.navigate(['/estimate'])
+  }
 }
