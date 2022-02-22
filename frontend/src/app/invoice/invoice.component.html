@@ -148,9 +148,9 @@
               <table class="table table-striped table-bordered">
               <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Description</th>
-                        <th scope="col">Quantity</th>
+                        <th scope="col">Particular</th>
                         <th scope="col">Weight</th>
+                        <th scope="col">Price</th>
                         <th scope="col">Making Charge</th>
                         <th scope="col">Amount</th>
                         <th scope="col">Action</th>
@@ -163,10 +163,10 @@
                         <td scope="row"> {{order.description}}
                             <!--<input style="border: 0ch;" [(ngModel)]="order.description" class="form-control" type="text" name="{{order.description}}" />-->
                         </td>
-                        <td scope="row">{{order.quantity}} 
+                        <td scope="row">{{order.weight}}
                            <!-- <input style="border: 0ch;" [(ngModel)]="order.quantity" class="form-control" type="text" name="{{order.quantity}}" />-->
                         </td>
-                        <td scope="row"> {{order.weight}}
+                        <td scope="row"> {{order.price|currency:'INR'}}
                           <!--<input style="border: 0ch;" [(ngModel)]="order.weight" class="form-control" type="text" name="{{order.weight}}" disabled/>-->
                         </td>
                         <td scope="row">{{order.makingCharge|currency:'INR'}}
@@ -187,19 +187,24 @@
                             <input  type="text" id="newAttributeName" [(ngModel)]="newAttribute.description" name="newAttributeName" />
                         </td>
                         <td>
-                            <input  type="text"  id="newAttributeQuantity" [(ngModel)]="newAttribute.quantity" name="newAttributePrice"/>
+                            <input type="text" id="newAttributeWight" [(ngModel)]="newAttribute.wight" name="newAttributeWeight"
+                              (ngModelChange)="getAmount(newAttribute.wight,newAttribute.price,newAttribute.makingCharge)" />
                         </td>
                         <td>
-                          <input   type="text" id="newAttributeWight" [(ngModel)]="newAttribute.weight" name="newAttributePrice" />
+                          <input type="text" id="newAttributePrice" [(ngModel)]="newAttribute.price" name="newAttributePrice"
+                            (ngModelChange)="getAmount(newAttribute.wight,newAttribute.price,newAttribute.makingCharge)" />
                       </td>
                       <td>
-                        <input   type="text" id="newAttributMakingCharge" [(ngModel)]="newAttribute.makingCharge" name="newAttributePrice" />
-                    </td>
+                        <input type="text" id="newAttributMakingCharge" [(ngModel)]="newAttribute.makingCharge" name="newAttributeCharge"
+                          (ngModelChange)="getAmount(newAttribute.wight,newAttribute.price,newAttribute.makingCharge)" />
+                        </td>
                         <td>
-                          <input   type="text" id="newAttributePrice" [(ngModel)]="newAttribute.amount" name="newAttributePrice" />
+                          <!--<input type="text" id="newAttributePrice" [(ngModel)]="{{calucatedAmount}}" name="newAttributePrice" />-->
+                          {{calucatedAmount}}
                       </td>
                         <td>
-                            <button  type="button" (click)="addFieldValue(newAttribute.id,newAttribute.description,newAttribute.quantity,newAttribute.weight,newAttribute.makingCharge,newAttribute.amount)">Add</button>
+                            <button type="button"
+                              (click)="addFieldValue(newAttribute.id,newAttribute.description,newAttribute.wight,newAttribute.price,newAttribute.makingCharge)">Add</button>
                         </td>
                     </tr>
                 </tbody>
@@ -208,7 +213,7 @@
                       <th scope="col"></th>
                       <th scope="col"></th>
                       <th scope="col"></th>
-                      <th scope="col">Payable</th>
+                      <th scope="col">Total</th>
                       <th scope="col">{{totalAmount|currency:'INR'}}</th>
                       
                   </tr>
@@ -216,16 +221,34 @@
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
-                    <th scope="col">Advance</th>
-                    <th scope="col"><input   type="text" id="advance" [(ngModel)]="advance" name="advance" value=0/></th>
-                    <th scope="col"><button  type="button" (click)="addAdvance(advance)">Add</button></th>
-                </tr>
-                <tr>
-                  <th scope="col"></th>
-                  <th scope="col"></th>
-                  <th scope="col"></th>
-                  <th scope="col">Balance</th>
-                  <th scope="col">{{totalBalance|currency:'INR'}}</th>
+                    <th scope="col">CGST:<input type="text" id="cgst" [(ngModel)]="cgst" name="cgst" value=0
+                        (ngModelChange)="updateTotal_byCGST(cgst)" /></th>
+                    <th scope="col">
+                      <!-- <input   type="text" id="advance" [(ngModel)]="advance" name="advance" value=0/>-->
+                      {{calculatedCgst|currency:'INR'}}
+                    </th>
+                    <!--<th scope="col"><button  type="button" (click)="addAdvance(advance)">Add</button></th>-->
+                    <th></th>
+                    </tr>
+                    <tr>
+                      <th scope="col"></th>
+                      <th scope="col"></th>
+                      <th scope="col"></th>
+                      <th scope="col">SGST:<input type="text" id="sgst" [(ngModel)]="sgst" name="sgst" value=0
+                          (ngModelChange)="updateTotal_bySGST(sgst)" /></th>
+                      <th scope=" col">
+                        <!-- <input type="text" id="caluatedSgst" [(ngModel)]="caluatedSgst" name="caluatedSgst" value=0 />-->
+                        {{calculatedSgst|currency:'INR'}}
+                      </th>
+                      <!--<th scope="col"><button type="button" (click)="addAdvance(advance)">Add</button></th>-->
+                      <th></th>
+                    </tr>
+                    <tr>
+                      <th scope="col"></th>
+                      <th scope="col"></th>
+                      <th scope="col"></th>
+                        <th scope="col">Payable</th>
+                        <th scope="col">{{totalPayable|currency:'INR'}}</th>
                   <th scope="col"></th>
               </tr>
               </thead>
@@ -267,16 +290,16 @@
   </table>
   <table  class="table  table-bordered">
         <tr style="font-family: 'Courier New', monospace;">
-          <th style="font-family: 'Courier New', monospace;">Description</th>
-          <th style="font-family: 'Courier New', monospace;">Quantity</th>
+          <th style="font-family: 'Courier New', monospace;">Particular</th>
           <th style="font-family: 'Courier New', monospace;">Weight</th>
+          <th style="font-family: 'Courier New', monospace;">Price</th>
           <th style="font-family: 'Courier New', monospace;">Making Charge</th>
           <th style="font-family: 'Courier New', monospace;">Amount</th>
         </tr>
         <tr *ngFor="let order of orderList; let i = index">
             <td style="font-family: 'Courier New', monospace;"> {{order.description}}</td>
-            <td style="font-family: 'Courier New', monospace;"> {{order.quantity}} </td>
-            <td style="font-family: 'Courier New', monospace;">{{order.weight}}</td>
+            <td style="font-family: 'Courier New', monospace;"> {{order.weight}} </td>
+            <td style="font-family: 'Courier New', monospace;">{{order.price}}</td>
             <td style="font-family: 'Courier New', monospace;">{{order.makingCharge|currency:'INR'}}</td>
             <td style="font-family: 'Courier New', monospace;"> {{order.amount|currency:'INR'}}</td>
         </tr>
@@ -284,22 +307,29 @@
           <th></th>
           <th></th>
           <th></th>
-          <th style="font-family: 'Courier New', monospace;">Payable</th>
+          <th style="font-family: 'Courier New', monospace;">Total</th>
           <th style="font-family: 'Courier New', monospace;">{{totalAmount|currency:'INR'}}</th>
       </tr>
       <tr>
         <th></th>
         <th></th>
         <th></th>
-        <th style="font-family: 'Courier New', monospace;">Advance</th>
-        <th style="font-family: 'Courier New', monospace;">{{advance |currency:'INR'}}</th>
+        <th style="font-family: 'Courier New', monospace;">CGST</th>
+        <th style="font-family: 'Courier New', monospace;">{{calculatedCgst |currency:'INR'}}</th>
+        </tr>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th style="font-family: 'Courier New', monospace;">SGST</th>
+          <th style="font-family: 'Courier New', monospace;">{{calculatedSgst |currency:'INR'}}</th>
     </tr>
     <tr>
       <th></th>
       <th></th>
       <th></th>
-      <th style="font-family: 'Courier New', monospace;">Balance</th>
-      <th style="font-family: 'Courier New', monospace;">{{totalBalance|currency:'INR'}}</th>
+      <th style="font-family: 'Courier New', monospace;">Payable</th>
+      <th style="font-family: 'Courier New', monospace;">{{totalPayable|currency:'INR'}}</th>
     </tr>
 </table>
 <div>
