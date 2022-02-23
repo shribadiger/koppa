@@ -260,10 +260,10 @@
   </div>
 </div>
 <div style="display: none;" id="print-section">
-  <table class="table">
+  <table class="table" style='font-family:"Courier New", Courier, monospace; font-size:80%'>
     <tr>
       <th style="font-family: 'Courier New', monospace;">INVOICE: {{invoiceNum}}</th>
-      <th style="font-family: 'Courier New', monospace;">Date:{{todayDate | date:'short':'IST'}}</th>
+      <th style="font-family: 'Courier New', monospace;">Date:{{todayDate | date: 'dd/MM/yyyy'}}</th>
     </tr>
   </table>
   <table  class="table">
@@ -287,7 +287,7 @@
     </tr>
 
   </table>
-  <table  class="table  table-bordered">
+  <table class="table  table-bordered" style='font-family:"Courier New", Courier, monospace; font-size:80%'>
         <tr style="font-family: 'Courier New', monospace;">
           <th style="font-family: 'Courier New', monospace;">Particular</th>
           <th style="font-family: 'Courier New', monospace;">Weight</th>
