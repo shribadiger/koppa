@@ -221,8 +221,8 @@
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
-                    <th scope="col">CGST:<input type="text" id="cgst" [(ngModel)]="cgst" name="cgst" value=0
-                        (ngModelChange)="updateTotal_byCGST(cgst)" /></th>
+                    <th scope="col">CGST+SGST:
+                    </th>
                     <th scope="col">
                       <!-- <input   type="text" id="advance" [(ngModel)]="advance" name="advance" value=0/>-->
                       {{calculatedCgst|currency:'INR'}}
@@ -234,11 +234,10 @@
                       <th scope="col"></th>
                       <th scope="col"></th>
                       <th scope="col"></th>
-                      <th scope="col">SGST:<input type="text" id="sgst" [(ngModel)]="sgst" name="sgst" value=0
-                          (ngModelChange)="updateTotal_bySGST(sgst)" /></th>
+                      <th scope="col">Advance</th>
                       <th scope=" col">
-                        <!-- <input type="text" id="caluatedSgst" [(ngModel)]="caluatedSgst" name="caluatedSgst" value=0 />-->
-                        {{calculatedSgst|currency:'INR'}}
+                        <input type="text" id="advancePayment" [(ngModel)]="advancePayment" name="advancePayment" value=0
+                          (ngModelChange)="addAdvance(advancePayment)" />
                       </th>
                       <!--<th scope="col"><button type="button" (click)="addAdvance(advance)">Add</button></th>-->
                       <th></th>
@@ -248,7 +247,7 @@
                       <th scope="col"></th>
                       <th scope="col"></th>
                         <th scope="col">Payable</th>
-                        <th scope="col">{{totalPayable|currency:'INR'}}</th>
+                        <th scope="col">{{totalBalance|currency:'INR'}}</th>
                   <th scope="col"></th>
               </tr>
               </thead>
@@ -321,20 +320,21 @@
           <th></th>
           <th></th>
           <th></th>
-          <th style="font-family: 'Courier New', monospace;">SGST</th>
-          <th style="font-family: 'Courier New', monospace;">{{calculatedSgst |currency:'INR'}}</th>
+          <th style="font-family: 'Courier New', monospace;">Adavance</th>
+          <th style="font-family: 'Courier New', monospace;">{{totalAdvance |currency:'INR'}}</th>
     </tr>
     <tr>
       <th></th>
       <th></th>
       <th></th>
       <th style="font-family: 'Courier New', monospace;">Payable</th>
-      <th style="font-family: 'Courier New', monospace;">{{totalPayable|currency:'INR'}}</th>
+      <th style="font-family: 'Courier New', monospace;">{{totalBalance|currency:'INR'}}</th>
     </tr>
 </table>
 <div>
   <table class="table">
-    <tr>
+      <tr>
+      <br><br>
       <td style="font-family: 'Courier New', monospace">Customer Sign:</td>
       <td style="font-family: 'Courier New', monospace"></td>
       <td style="font-family: 'Courier New', monospace">Salesman Name:</td>
