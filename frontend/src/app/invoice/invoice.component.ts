@@ -22,12 +22,14 @@ export class InvoiceComponent implements OnInit {
   calucatedAmount: number;
   calculatedCgst: number;
   calculatedSgst: number;
+  totalBalance: number;
   todayDate : Date = new Date();
   invoiceNum:number= Date.now();
   constructor(private router: Router) { 
     this.totalAmount=0;
     this.totalPayable = 0;
     this.totalAdvance=0;
+    this.totalBalance = 0;
   }
   
   private orderList: Array<any> = [];
@@ -35,14 +37,14 @@ export class InvoiceComponent implements OnInit {
   updateTotal_byCGST(cgst: string) {
     if (isNaN(parseFloat(cgst))) {
       this.totalPayable = this.totalPayable;
-      this.get_calculateCgst("0")
+      this.get_calculateCgst()
     } else {
       this.totalPayable = this.totalAmount + (this.totalAmount * parseFloat(cgst) / 100);
-      this.get_calculateCgst(cgst);
+      this.get_calculateCgst();
     }
   }
-  get_calculateCgst(cgstPercentage: string) {
-    this.calculatedCgst = this.totalAmount * parseFloat(cgstPercentage) / 100;
+  get_calculateCgst() {
+    this.calculatedCgst = this.totalAmount * 3 / 100;
   }
   get_calculateSgst(sgstPercentage: string) {
     this.calculatedSgst = this.totalAmount * parseFloat(sgstPercentage) / 100;
@@ -72,8 +74,10 @@ export class InvoiceComponent implements OnInit {
         this.orderList.push(this.newAttribute)
         this.newAttribute = {};
     this.totalAmount = this.totalAmount + (this.getAmt(Wt, Pr, MkCharge));
-    this.totalPayable = this.totalAmount;
     this.calucatedAmount = 0;
+    this.get_calculateCgst();
+    this.totalPayable = this.totalAmount + this.calculatedCgst;
+    this.totalBalance = this.totalPayable;
     }
    
   getAmount(iWeight: string, iPrice: string, iMakingCharge: string) {
@@ -97,7 +101,7 @@ export class InvoiceComponent implements OnInit {
     addAdvance(advance='0'){
       console.log("Advance Amount");
       this.totalAdvance = parseFloat(advance);
-      this.totalPayable = this.totalAmount - this.totalAdvance;
+      this.totalBalance = this.totalPayable - this.totalAdvance;
     }
 
 
